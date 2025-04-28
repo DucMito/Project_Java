@@ -1,0 +1,262 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Sơn Store</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="eCommerce HTML Template Free Download" name="keywords">
+        <meta content="eCommerce HTML Template Free Download" name="description">
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap" rel="stylesheet">
+
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="lib/slick/slick.css" rel="stylesheet">
+        <link href="lib/slick/slick-theme.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <i class="fa fa-envelope"></i>
+                        sondhhe170206@fpt.edu.vn
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fa fa-phone-alt"></i>
+                        0867085558
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top bar End -->
+
+        <!-- Nav Bar Start -->
+        <div class="nav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a href="#" class="navbar-brand">MENU</a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto">
+                            <a href="http://localhost:8080/project/homeadmin" class="nav-item nav-link active">Sản phẩm</a>
+                                <a href="my-account.jsp" class="nav-item nav-link">Hello ${sessionScope.customer.firstname} ${sessionScope.customer.lastname}</a>
+                        </div>
+                        <div class="navbar-nav ml-auto">
+                                <a class="nav-item nav-link" href="logout">Đăng xuất</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Nav Bar End -->      
+
+        <!-- Bottom Bar Start -->
+        <div class="bottom-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <div class="logo">
+                            <a href="http://localhost:8080/project/home">
+                                <img src="img/logo.png" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form action="adminsearch" method="POST"> 
+                            <div class="search">
+                                <input value="${txtS}" name="search" type="text" placeholder="Tìm kiếm">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form> 
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="user">
+                            <a href="addproduct.jsp" class="btn cart">
+                                <i class="fas fa-plus"></i>
+                                <span>Thêm sản phẩm</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Cart</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+
+        <!-- Cart Start -->
+        <div class="cart-page">
+            <div class="container-fluid" >
+                <div class="row">
+                    <div class="col-lg-8" >
+                        <div class="cart-page-inner" style="width: 150%">
+                            <div class="table-responsive" >
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Title</th>
+                                            <th>Mô tả</th>
+                                            <th>Sửa</th>
+                                            <th>Xóa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle">
+                                        <c:forEach items="${listP}" var="o">
+                                        <tr>
+                                            <td style="width: 300px; height: 100px"  >
+                                                <div class="img">
+                                                    <a href="#"><img src="img/${o.image}" alt="Image"></a>
+                                                    <p>${o.name}</p>
+                                                </div>
+                                            </td>
+                                            <td style="width: 100px; height: 50px">$${o.price}</td >
+                                            <td style="width: 200px; height: 100px">
+                                                ${o.title}
+                                            </td>
+                                            <td style="width: 500px; height: 50px">${o.description}</td>
+                                            <td><a class="fas fa-pencil-alt" href="update?peid=${o.productId}"></a></td>
+                                            <td><a class="fa fa-trash" href="delete?pdid=${o.productId}"></a></td>
+                                        </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cart End -->
+
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Liên lạc</h2>
+                            <div class="contact-info">
+                                <p><i class="fa fa-map-marker"></i>Yên Lộc, Ý Yên, Nam Định</p>
+                                <p><i class="fa fa-envelope"></i>dohuyson134@gmail.com</p>
+                                <p><i class="fa fa-phone"></i>0837848683</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Theo dõi</h2>
+                            <div class="contact-info">
+                                <div class="social">
+                                    <a href="https://twitter.com/Sn6597333187600"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.facebook.com/sondo0603"><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="https://www.instagram.com/son_dhuy?igsh=YTQwZjQ0NmI0OA=="><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.youtube.com/channel/UCBMGkYPuwVQqvscooUzfd5g"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Công ty</h2>
+                            <ul>
+                                <li><a href="https://daihoc.fpt.edu.vn/">About Us</a></li>
+                                <li><a href="https://www.youtube.com/@fug-giangviencfphanangcau6310">Chính sách bảo mật</a></li>
+                                <li><a href="https://www.youtube.com/watch?v=CTZ0iiRd8DQ">Điều khoản & Điều kiện</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Thông tin mua hàng</h2>
+                            <ul>
+                                <li><a href="#">Chính sách thanh toán</a></li>
+                                <li><a href="#">Chính sách vận chuyển</a></li>
+                                <li><a href="#">Chính sách hoàn trả</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row payment align-items-center">
+                    <div class="col-md-6">
+                        <div class="payment-method">
+                            <h2>We Accept:</h2>
+                            <img src="img/payment-method.png" alt="Payment Method" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="payment-security">
+                            <h2>Secured By:</h2>
+                            <img src="img/godaddy.svg" alt="Payment Security" />
+                            <img src="img/norton.svg" alt="Payment Security" />
+                            <img src="img/ssl.svg" alt="Payment Security" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Footer Bottom Start -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 copyright">
+                        <p>Copyright &copy; <a href="#">Your Site Name</a>. All Rights Reserved</p>
+                    </div>
+
+                    <div class="col-md-6 template-by">
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->					
+                        <p>Designed By <a href="https://www.facebook.com/sondo0603">Do Huy Son</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom End -->       
+
+        <!-- Back to Top -->
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/slick/slick.min.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="js/main.js"></script>
+    </body>
+</html>
